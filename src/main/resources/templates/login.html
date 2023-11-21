@@ -129,10 +129,10 @@ p{
         <form th:action="@{/login}" th:object="${loginForm}" method="post">
             <p th:if="${error}" class="error">UserName & Password Incorrect</p>
             <div class="row">
-                <input type="text" name="username">
+                <input type="text" name="email">
             </div>
             <div class="row">
-                <input type="password" name="password">
+                <input type="password" name="myPassword">
             </div>
             <div class="row button">
                 <input type="submit" value="Login">

@@ -21,19 +21,24 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                                         .requestMatchers( "/register", "/logout").permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/user/**").hasAuthority("USER")
                         .anyRequest().authenticated())
                 .formLogin(form ->
                         form.loginPage("/login")
+                                .usernameParameter("email")
+                                .passwordParameter("myPassword")
 //                                .successForwardUrl("redirect:/home")
                                 .defaultSuccessUrl("/home", true)
-                                .failureForwardUrl("/login?error=true")
+                                .failureUrl("/login?my_error=error")
+//                                .failureForwardUrl("/login?error=true")
                                 .permitAll()
                 ).logout(form -> form.permitAll());
         return http.build();
     }
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    public static BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

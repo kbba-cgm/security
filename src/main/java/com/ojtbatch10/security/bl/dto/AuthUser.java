@@ -6,9 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,16 +21,27 @@ public class AuthUser implements UserDetails {
     private String username;
     private String email;
     private String password;
+    private String role;
 
     public AuthUser(Account account){
         this.username = account.getUsername();
         this.email = account.getEmail();
         this.password = account.getPassword();
+        this.role = account.getRole();
+    }
+
+    public AuthUser(AccountDTO accountDTO){
+        this.username = accountDTO.getUsername();
+        this.email = accountDTO.getEmail();
+        this.password = accountDTO.getPassword();
+        this.role = accountDTO.getRole();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> authorityList = new ArrayList<>();
+        authorityList.add(new SimpleGrantedAuthority(this.role));
+        return authorityList;
     }
 
     @Override
@@ -37,7 +51,7 @@ public class AuthUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.username;
+        return this.email;
     }
 
     @Override

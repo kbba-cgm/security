@@ -10,4 +10,14 @@ public class HomeController {
     public String home() {
         return "home";
     }
+
+    @GetMapping("/admin/home")
+    public void adminHome() {
+        System.out.println("welcome to admin home****************");
+    }
+
+    @GetMapping("/user/home")
+    public void userHome() {
+        System.out.println("welcome to user home****************");
+    }
 }

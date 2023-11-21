@@ -18,12 +18,19 @@ public class AccountServiceImpl implements AccountService {
     public void registerAccount(AccountDTO accountDTO) {
         var account = new Account(accountDTO);
         account.setPassword(encoder.encode(account.getPassword()));
+        account.setRole("ADMIN");
         accountRepository.save(account);
     }
 
     @Override
     public AccountDTO getAccountbyUsername(String username) {
         Account account = accountRepository.findByUsername(username);
+        return new AccountDTO(account);
+    }
+
+    @Override
+    public AccountDTO getAccountbyEmail(String email) {
+        Account account = accountRepository.findByEmail(email);
         return new AccountDTO(account);
     }
 }

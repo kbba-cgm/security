@@ -8,4 +8,5 @@ public interface AccountService {
     void registerAccount(AccountDTO accountDTO);
 
     AccountDTO getAccountbyUsername(String username);
+    AccountDTO getAccountbyEmail(String email);
 }

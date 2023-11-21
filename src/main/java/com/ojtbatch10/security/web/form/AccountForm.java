@@ -15,10 +15,12 @@ public class AccountForm {
     private String username;
     private String email;
     private String password;
+    private String role;
 
     public AccountForm(AccountDTO accountDTO) {
         this.username = accountDTO.getUsername();
         this.email = accountDTO.getEmail();
         this.password = accountDTO.getPassword();
+        this.role = accountDTO.getRole();
     }
 }

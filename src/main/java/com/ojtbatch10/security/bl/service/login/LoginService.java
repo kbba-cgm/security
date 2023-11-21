@@ -13,13 +13,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService implements UserDetailsService {
+//    @Autowired
+//    AccountRepository accountRepository;
+
     @Autowired
-    AccountRepository accountRepository;
+    AccountService accountService;
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         try{
-            Account account = accountRepository.findByUsername(username);
-            return new AuthUser(account);
+//            Account account = accountRepository.findByUsername(username);
+            // email -> user one
+            AccountDTO accountDTO = accountService.getAccountbyEmail(email);
+            return new AuthUser(accountDTO);
         } catch (Exception e) {
             throw new UsernameNotFoundException("User not found");
         }

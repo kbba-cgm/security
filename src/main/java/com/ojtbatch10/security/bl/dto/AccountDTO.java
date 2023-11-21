@@ -15,16 +15,19 @@ public class AccountDTO {
     private String username;
     private String email;
     private String password;
+    private String role;
 
     public AccountDTO(Account account) {
         this.username = account.getUsername();
         this.email = account.getEmail();
         this.password = account.getPassword();
+        this.role = account.getRole();
     }
 
     public AccountDTO(AccountForm accountForm) {
         this.username = accountForm.getUsername();
         this.email = accountForm.getEmail();
         this.password = accountForm.getPassword();
+        this.role = accountForm.getRole();
     }
 }
